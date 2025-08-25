@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "modern-hillbilly-tabs-4-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/modernHillbillyTabs4/ModernHillbillyTabs4WebPart.js",
+          "manifest": "./src/webparts/modernHillbillyTabs4/ModernHillbillyTabs4WebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ModernHillbillyTabs4WebPartStrings": "lib/webparts/modernHillbillyTabs4/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.20.3",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.24.0"
+    },
+    "version": "1.20.0",
+    "libraryName": "modern-hillbilly-tabs-upgraded-4",
+    "libraryId": "d8ad010d-eba2-484b-9808-bc53a4257792",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "modern-hillbilly-tabs-upgraded-4",
+    "solutionShortDescription": "modern-hillbilly-tabs-upgraded-4 description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

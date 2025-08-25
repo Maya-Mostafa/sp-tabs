@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "modern-hillbilly-tabs-upgraded-4-client-side-solution",
+    "id": "d8ad010d-eba2-484b-9808-bc53a4257792",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.20.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "modern-hillbilly-tabs-upgraded-4 description"
+      },
+      "longDescription": {
+        "default": "modern-hillbilly-tabs-upgraded-4 description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "modern-hillbilly-tabs-upgraded-4 Feature",
+        "description": "The feature that activates elements of the modern-hillbilly-tabs-upgraded-4 solution.",
+        "id": "7f921c41-57f8-4c05-91ac-2c531ebec988",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/modern-hillbilly-tabs-upgraded-4.sppkg"
+  }
+}
