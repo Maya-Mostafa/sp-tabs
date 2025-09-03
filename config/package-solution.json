@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "modern-hillbilly-tabs-upgraded-4-client-side-solution",
+    "name": "tabs-for-webparts-client-side-solution",
     "id": "d8ad010d-eba2-484b-9808-bc53a4257792",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
@@ -35,6 +35,6 @@
     ]
   },
   "paths": {
-    "zippedPackage": "solution/modern-hillbilly-tabs-upgraded-4.sppkg"
+    "zippedPackage": "solution/tabs-for-webparts.sppkg"
   }
 }

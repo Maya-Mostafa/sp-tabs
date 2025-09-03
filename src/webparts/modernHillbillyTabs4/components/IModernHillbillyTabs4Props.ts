@@ -12,4 +12,6 @@ export interface IModernHillbillyTabs4Props {
   displayMode: any;
 
   pgWebparts: any[];
+  tabStyle: string;
+  tabAlign: string;
 }

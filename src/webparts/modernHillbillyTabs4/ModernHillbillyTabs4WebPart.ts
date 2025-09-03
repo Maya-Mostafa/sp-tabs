@@ -5,7 +5,8 @@ import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
@@ -15,6 +16,8 @@ import ModernHillbillyTabs4 from './components/ModernHillbillyTabs4';
 import { IModernHillbillyTabs4Props } from './components/IModernHillbillyTabs4Props';
 import { PropertyFieldCollectionData, CustomCollectionFieldType } from '@pnp/spfx-property-controls/lib/PropertyFieldCollectionData';
 import * as $ from 'jquery';
+import { ColorPicker, DefaultButton, IColor, Icon, Label } from '@fluentui/react';
+import { IconPicker } from '@pnp/spfx-controls-react/lib/IconPicker';
 
 export interface IModernHillbillyTabs4WebPartProps {
   description: string;
@@ -22,7 +25,9 @@ export interface IModernHillbillyTabs4WebPartProps {
   webpartClass: string;
   displayMode: any;
   tabData: any[];
-  pgWebparts: any[]
+  pgWebparts: any[];
+  tabStyle: string;
+  tabAlign: string;
 }
 
 export default class ModernHillbillyTabs4WebPart extends BaseClientSideWebPart<IModernHillbillyTabs4WebPartProps> {
@@ -45,7 +50,9 @@ export default class ModernHillbillyTabs4WebPart extends BaseClientSideWebPart<I
         tabData: this.properties.tabData,
         
         displayMode: this.displayMode,
-        pgWebparts: this.properties.pgWebparts
+        pgWebparts: this.properties.pgWebparts,
+        tabStyle: this.properties.tabStyle,
+        tabAlign: this.properties.tabAlign
       }
     );
 
@@ -139,13 +146,29 @@ export default class ModernHillbillyTabs4WebPart extends BaseClientSideWebPart<I
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
               groupName: strings.BasicGroupName,
               groupFields: [
+                PropertyPaneDropdown('tabStyle', {
+                  label: 'Tabs Style',
+                  options: [
+                    {key: 'tabStyle1', text: 'Ordinary tabs'},
+                    {key: 'tabStyle2', text: 'Bottom border with shade'},
+                    {key: 'tabStyle3', text: 'Top border with shade'},
+                    {key: 'tabStyle4', text: 'Bottom border'},
+                    {key: 'tabStyle5', text: 'Circles'},
+                    {key: 'tabStyle6', text: 'Colored'},
+                  ]
+                }),
+                PropertyPaneDropdown('tabAlign',{
+                  label: 'Tabs Alignment',
+                  options: [
+                    {key: 'alignLeft', text: 'Left'},
+                    {key: 'alignCenter', text: 'Center'},
+                    {key: 'alignRight', text: 'Right'},
+                  ]
+                }),
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
                 }),
@@ -181,7 +204,91 @@ export default class ModernHillbillyTabs4WebPart extends BaseClientSideWebPart<I
                       id: "TabLabel",
                       title: "Tab Label",
                       type: CustomCollectionFieldType.string
-                    }
+                    },
+                    {
+                      id: "TabBgColor",
+                      title: "Tab Bg Color",
+                      type: CustomCollectionFieldType.custom,
+                      onCustomRender: (field, value, onUpdate, item, itemId, onError) => {
+                        return(
+                          React.createElement('div', {className: 'pickColorDiv'},                                                                                    
+                            React.createElement(ColorPicker, {
+                              color: value,
+                              styles: {
+                                colorSquare :{},
+                                panel: { padding: 0 },
+                                colorRectangle: { minWidth: 170, minHeight: 120 },
+                              },
+                              showPreview: true,
+                              onChange: (ev: React.SyntheticEvent<HTMLElement>, color: IColor) => {
+                                onUpdate(field.id, color)
+                              },
+                              key: 'customColorFieldId1'
+                            })
+                          )
+                        )
+                      }
+                    },
+                    {
+                      id: "TabForColor",
+                      title: "Tab Text Color",
+                      type: CustomCollectionFieldType.custom,
+                      onCustomRender: (field, value, onUpdate, item, itemId, onError) => {
+                        return(
+                          React.createElement('div', {className: 'pickColorDiv'},                                                                                    
+                            React.createElement(ColorPicker, {
+                              color: value,
+                              styles: {
+                                colorSquare :{},
+                                panel: { padding: 0 },
+                                colorRectangle: { minWidth: 170, minHeight: 120 },
+                              },
+                              showPreview: true,
+                              onChange: (ev: React.SyntheticEvent<HTMLElement>, color: IColor) => {
+                                onUpdate(field.id, color)
+                              },
+                              key: 'customColorFieldId2'
+                            })
+                          )
+                        )
+                      }
+                    },
+                    {id: "TabIcon", title: 'Icon', type: CustomCollectionFieldType.custom,
+                      onCustomRender: (field, value, onUpdate, item, itemId, onError) => {
+                        return (
+                          React.createElement('div', {className: 'customIconDiv'},
+                            item.TabIcon ?
+                            React.createElement(Icon, {iconName: item.TabIcon})
+                            :
+                            React.createElement(Label, {
+                              className: 'fileTextbox', 
+                            }, 'No Icon selected'
+                            ),
+                            React.createElement(IconPicker, {
+                              key: itemId,
+                              currentIcon: value,
+                              buttonLabel: 'Select Icon',
+                              onChange: (iconName: string) => {
+                                onUpdate(field.id, iconName);                                
+                              },
+                              onSave: (iconName: string) => {
+                                onUpdate(field.id, iconName);
+                              },
+                              onCancel: () => {
+                                onUpdate(field.id, ''); 
+                              }
+                            }),
+                            React.createElement(DefaultButton, {
+                              className: 'resetIconBtn', 
+                              primary: false, 
+                              onClick: () => {
+                                onUpdate(field.id, ''); 
+                              }
+                            }, 'Reset Icon')
+                          )
+                        );
+                      }
+                    },
                   ],
                   disabled: false
                 })
